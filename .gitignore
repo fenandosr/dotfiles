@@ -5,6 +5,7 @@
 !.gitignore
 !.zshrc
 !.vimrc
+!.nvimrc
 
 # ...even if they are in subdirectories
 #!*/
