@@ -69,8 +69,8 @@ function! ToggleSelected(visual) range
         endif
     endif
 
-    let [lnum1, col1] = getpos(''<')[1:2]
-    let [lnum2, col2] = getpos(''>')[1:2]
+    let [lnum1, col1] = getpos("'<")[1:2]
+    let [lnum2, col2] = getpos("'>")[1:2]
 
     let pattern = '\%^\|\%<'.lnum1.'l\|\%<'.col1.'v\|\%>'.lnum2.'l\|\%>'.col2.'v'
     let g:toggle_selected_hide = matchadd('HideSelected', pattern, 1000)
@@ -126,6 +126,10 @@ set number
 " Show the column/row
 set ruler
 
+" Highlight current line and column
+set cursorline
+set cursorcolumn
+
 " Highlight only the lines that go past 80 characters
 highlight ColorColumn ctermbg=green guibg=green
 call matchadd('ColorColumn', '\%82v', 100)
@@ -167,8 +171,7 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 
-" I have been converted to the dark side, I will use spaces to indent code
-" from here on out
+" Spaces to indent code
 set expandtab
 
 " Buffer Settings
@@ -330,16 +333,6 @@ set wildignore+=*/.nx/**,*.app
 " Set on textwidth when in markdown files
 autocmd FileType markdown set textwidth=80
 
-" Smarter completion in C
-autocmd FileType c set omnifunc=ccomplete#Complete
-
-" My own special flavoring to running programs
-autocmd FileType asm,c,objc,scheme,sh,python,perl,javascript nn <leader>R :!deepThought.sh '%:p'<cr>
-
-" Use 2 spaces when in Lua & Ruby
-autocmd FileType lua,ruby set tabstop=2
-autocmd FileType lua,ruby set shiftwidth=2
-
 if !s:plugins
 
 " Bootstrap Vundle on new systems
@@ -428,9 +421,6 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-cucumber'
 Plugin 'tpope/vim-bundler'
 
-" Elixir plugins
-Plugin 'elixir-lang/vim-elixir'
-
 " Themes
 Plugin 'freeo/vim-kalisi'
 Plugin 'flazz/vim-colorschemes'
@@ -505,8 +495,8 @@ let g:syntastic_auto_loc_list = 2
 let g:syntastic_enable_signs = 1
 let g:syntastic_java_checkers = ['checkstyle', 'javac']
 let g:syntastic_java_javac_delete_output = 1
-let g:syntastic_java_checkstyle_conf_file = '~/bin/jars/sun_checks.xml'
-let g:syntastic_java_checkstyle_classpath = '~/bin/jars/checkstyle-5.5-all.jar'
+"let g:syntastic_java_checkstyle_conf_file = '~/bin/jars/sun_checks.xml'
+"let g:syntastic_java_checkstyle_classpath = '~/bin/jars/checkstyle-5.5-all.jar'
 let g:syntastic_filetype_map = { 'rnoweb': 'tex'}
 
 " UltiSnip options
@@ -572,25 +562,6 @@ let g:EasyMotion_startofline = 0
 " Tagbar Options
 let g:tagbar_left = 0
 let g:tagbar_width = 30
-
-" Elixir + ctags + Tagbar
-let g:tagbar_type_elixir = {
-    \ 'ctagstype' : 'elixir',
-    \ 'kinds' : [
-        \ 'f:functions',
-        \ 'functions:functions',
-        \ 'c:callbacks',
-        \ 'd:delegates',
-        \ 'e:exceptions',
-        \ 'i:implementations',
-        \ 'a:macros',
-        \ 'o:operators',
-        \ 'm:modules',
-        \ 'p:protocols',
-        \ 'r:records'
-    \ ]
-\ }
-
 
 " Ack options
 nmap <leader>/ :Ack!<space>
