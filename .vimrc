@@ -398,6 +398,7 @@ Plugin 'benmills/vimux'
 Plugin 'vim-scripts/SyntaxRange'
 Plugin 'tpope/vim-speeddating'
 Plugin 'tpope/vim-repeat'
+Plugin 'fenandosr/taskpaper.vim'
 
 " Vim improvements
 Plugin 'embear/vim-localvimrc'
