@@ -398,6 +398,12 @@ Plugin 'benmills/vimux'
 Plugin 'vim-scripts/SyntaxRange'
 Plugin 'tpope/vim-speeddating'
 Plugin 'tpope/vim-repeat'
+Plugin 'shougo/vimproc'
+Plugin 'shougo/vimshell'
+Plugin 'tpope/vim-commentary'
+
+" Format and beautifiers
+Plugin 'Chiel92/vim-autoformat'
 
 " Vim improvements
 Plugin 'embear/vim-localvimrc'
@@ -433,8 +439,8 @@ let g:color_schemes = ['vim-kalisi', 'vim-colorschemes']
 
 nmap <leader>t? :map <leader>t<cr>
 nmap <leader>tB :VimFiler<cr>
-nmap <leader>tW :cal StripTrailingWhitespace()<cr>
 nmap <leader>tb :VimFilerExplorer<cr>
+nmap <leader>tW :cal StripTrailingWhitespace()<cr>
 nmap <leader>tt :TagbarToggle<cr>
 nmap <leader>tu :UndotreeToggle<cr>
 nmap <leader>tw :cal ToggleWhitespace()<cr>
@@ -448,6 +454,8 @@ nmap <leader>vC :BundleClean!<cr>
 nmap <leader>v? :map <leader>v <cr>
 
 " Fugitive mapping
+nmap <leader>gW :Gwrite<cr>
+nmap <leader>gR :Gread<cr>
 nmap <leader>gb :Gblame<cr>
 nmap <leader>gc :Gcommit<cr>
 nmap <leader>gd :Gdiff<cr>
@@ -493,8 +501,8 @@ let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_enable_signs = 1
-let g:syntastic_java_checkers = ['checkstyle', 'javac']
-let g:syntastic_java_javac_delete_output = 1
+"let g:syntastic_java_checkers = ['checkstyle', 'javac']
+"let g:syntastic_java_javac_delete_output = 1
 "let g:syntastic_java_checkstyle_conf_file = '~/bin/jars/sun_checks.xml'
 "let g:syntastic_java_checkstyle_classpath = '~/bin/jars/checkstyle-5.5-all.jar'
 let g:syntastic_filetype_map = { 'rnoweb': 'tex'}
