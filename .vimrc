@@ -401,6 +401,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'shougo/vimproc'
 Plugin 'shougo/vimshell'
 Plugin 'tpope/vim-commentary'
+Plugin 'fenandosr/taskpaper.vim'
 
 " Format and beautifiers
 Plugin 'Chiel92/vim-autoformat'
@@ -501,8 +502,8 @@ let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_enable_signs = 1
-"let g:syntastic_java_checkers = ['checkstyle', 'javac']
-"let g:syntastic_java_javac_delete_output = 1
+let g:syntastic_java_checkers = ['checkstyle', 'javac']
+let g:syntastic_java_javac_delete_output = 1
 "let g:syntastic_java_checkstyle_conf_file = '~/bin/jars/sun_checks.xml'
 "let g:syntastic_java_checkstyle_classpath = '~/bin/jars/checkstyle-5.5-all.jar'
 let g:syntastic_filetype_map = { 'rnoweb': 'tex'}
