@@ -3,14 +3,16 @@
 
 # But not these files...
 !/.gitignore
+# user bin
+!/bin/
 # bash and zsh
-!.bashrc
-!.bash_aliases
-!.bash_goodies
+!/.bashrc
+!/.bash_aliases
+!/.bash_goodies
 !/.zshrc
 # git
-git-completion.bash
-git-prompt.sh
+/git-completion.bash
+/git-prompt.sh
 # vim
 !/.vimrc
 # neovim
