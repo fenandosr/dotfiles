@@ -3,12 +3,18 @@
 
 # But not these files...
 !/.gitignore
+# bash and zsh
+!.bashrc
+!.bash_aliases
+!.bash_goodies
 !/.zshrc
+# git
+git-completion.bash
+git-prompt.sh
+# vim
 !/.vimrc
+# neovim
 !/.config
 .config/*
 !.config/nvim
-
-# ...even if they are in subdirectories
-#!*/
 
