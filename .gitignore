@@ -1,11 +1,12 @@
 # Ignore everything
-*
+/*
 
 # But not these files...
-!.gitignore
-!.zshrc
-!.vimrc
-!.nvimrc
+!/.gitignore
+!/.zshrc
+!/.vimrc
+!/.config
+.config/*
 !.config/nvim
 
 # ...even if they are in subdirectories
