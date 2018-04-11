@@ -6,6 +6,7 @@
 !.zshrc
 !.vimrc
 !.nvimrc
+!.config/nvim
 
 # ...even if they are in subdirectories
 #!*/

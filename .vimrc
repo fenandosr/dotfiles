@@ -297,7 +297,7 @@ if has('gui_running')
     if s:OS == 'osx'
         set guifont=Droid\ Sans\ Mono\ for\ Powerline:h11
     elseif s:OS == 'linux'
-        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
+        set guifont=Droid\ Sans\ Mono\ for\ Powerline:h11
     endif
 endif
 
@@ -402,6 +402,7 @@ Plugin 'shougo/vimproc'
 Plugin 'shougo/vimshell'
 Plugin 'tpope/vim-commentary'
 Plugin 'fenandosr/taskpaper.vim'
+Plugin 'lambdalisue/vim-fullscreen'  " for linux see: https://github.com/lambdalisue/vim-fullscreen
 
 " Format and beautifiers
 Plugin 'Chiel92/vim-autoformat'
