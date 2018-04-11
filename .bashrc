@@ -92,7 +92,14 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-        # Mac OSX
+    # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+    export PATH="$PATH:$HOME/.rvm/bin"
+
+    [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+    # Short of learning how to actually configure OSX, here's a hacky way to use
+    # GNU manpages for programs that are GNU ones, and fallback to OSX manpages otherwise
+    alias man='_() { echo $1; man -M $(brew --prefix)/opt/coreutils/libexec/gnuman $1 1>/dev/null 2>&1;  if [ "$?" -eq 0 ]; then man -M $(brew --prefix)/opt/coreutils/libexec/gnuman $1; else man $1; fi }; _'
 elif [[ "$OSTYPE" == "cygwin" ]]; then
 
 fi
