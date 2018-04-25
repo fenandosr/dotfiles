@@ -8,6 +8,9 @@
 # user bin
 !/bin/
 
+# teamocil yaml files
+!/.teamocil/
+
 # bash and zsh
 !/.bashrc
 !/.bash_aliases
