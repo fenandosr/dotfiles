@@ -298,6 +298,7 @@ if has('gui_running')
         set guifont=Droid\ Sans\ Mono\ for\ Powerline:h11
     elseif s:OS == 'linux'
         set guifont=Droid\ Sans\ Mono\ for\ Powerline:h11
+        set guifont=Hack\ 11
     endif
 endif
 
@@ -372,7 +373,7 @@ Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/vimfiler.vim'
 
 " Navigation
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'mileszs/ack.vim'
 
@@ -380,6 +381,7 @@ Plugin 'mileszs/ack.vim'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'bitc/vim-bad-whitespace'
+Plugin 'ryanoasis/vim-devicons'
 
 " Buffers
 Plugin 'jeetsukumaran/vim-buffergator'
@@ -402,7 +404,6 @@ Plugin 'shougo/vimproc'
 Plugin 'shougo/vimshell'
 Plugin 'tpope/vim-commentary'
 Plugin 'fenandosr/taskpaper.vim'
-Plugin 'lambdalisue/vim-fullscreen'  " for linux see: https://github.com/lambdalisue/vim-fullscreen
 
 " Format and beautifiers
 Plugin 'Chiel92/vim-autoformat'
