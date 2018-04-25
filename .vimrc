@@ -381,7 +381,6 @@ Plugin 'mileszs/ack.vim'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'bitc/vim-bad-whitespace'
-Plugin 'ryanoasis/vim-devicons'
 
 " Buffers
 Plugin 'jeetsukumaran/vim-buffergator'
@@ -749,6 +748,9 @@ endfunction
 
 " End the conditional for plugins
 endif
+
+" Load devicons
+Plugin 'ryanoasis/vim-devicons'
 
 " Load plugins and indent for the filtype
 " **Must be last for Vundle**
