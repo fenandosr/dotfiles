@@ -32,3 +32,5 @@
 # tmux
 !/.tmux.conf
 
+# thyme integration
+!/.thymerc
