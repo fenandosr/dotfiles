@@ -1,4 +1,4 @@
-set :timer, 1*60              # 25 minute pomodoros
+set :timer, 25*60              # 25 minute pomodoros
 set :timer_break, 5*60         # 5 minute breaks
 set :warning, 5*60             # show warning color in tmux at <5 minutes, 0 to disable
 set :warning_color, 'red,bold' # warning color for tmux is red/bold
