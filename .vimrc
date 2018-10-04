@@ -297,8 +297,7 @@ if has('gui_running')
     if s:OS == 'osx'
         set guifont=Droid\ Sans\ Mono\ for\ Powerline:h11
     elseif s:OS == 'linux'
-        set guifont=Droid\ Sans\ Mono\ for\ Powerline:h11
-        set guifont=Hack\ 11
+        set guifont=Hack\ 12
     endif
 endif
 
@@ -539,8 +538,33 @@ nmap <leader>bs :CtrlPMRU<cr>
 " Airline options
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
-let g:airline_theme = 'kalisi'
+let g:airline_theme = 'papercolor'
 let g:airline_powerline_fonts = 1
+" existance
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+" airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
 
 " Whitespace settings
 
@@ -784,6 +808,6 @@ set t_AB=[48;5;%dm
 set t_AF=[38;5;%dm
 
 " Must be loaded after all color scheme plugins
-if HasColorScheme('kalisi') && s:plugins
-    colorscheme kalisi
+if HasColorScheme('atom') && s:plugins
+    colorscheme atom
 endif
