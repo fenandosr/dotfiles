@@ -8,7 +8,7 @@ set :tmux, true                # turn on tmux integration
 set :tmux_theme, "#[fg=mycolor,bg=mycolor]#[fg=%s]%s#[fg=mycolor,bg=mycolor]"
 
 # execute hook after each pomodoro
-require_relative("bin/rubyplatform.rb")
+require_relative(".local/bin/rubyplatform.rb")
 if OS.linux?
   after do |seconds_left|
     `notify-send "Pomodoro" "Thyme's Up!" -t 7000` if seconds_left == 0
