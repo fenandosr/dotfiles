@@ -37,3 +37,7 @@
 # thyme integration
 !/.thymerc
 .Rproj.user
+
+# konsole
+!.config/konsole.css
+!.config/konsolerc
