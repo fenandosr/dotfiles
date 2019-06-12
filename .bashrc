@@ -8,6 +8,9 @@ case $- in
       *) return;;
 esac
 
+# Some constants
+DIST=`lsb_release -d | awk -F"\t" '{print $2}' | awk -F " " '{print $1}'`
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -35,6 +38,7 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
+
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
@@ -53,12 +57,12 @@ force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
     else
-	color_prompt=
+    color_prompt=
     fi
 fi
 
@@ -130,12 +134,12 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 # '\W' adds the name of the current directory
 export PS1="$purple\u@\h$green\$(__git_ps1)$blue \W $ $reset"
 
-# Source ma goodies
+# Source my goodies
 source ~/.bash_goodies
 
 # For android adb
 #if [ -d "$HOME/adb-fastboot/platform-tools" ] ; then
-#	     export PATH="$HOME/adb-fastboot/platform-tools:$PATH"
+#        export PATH="$HOME/adb-fastboot/platform-tools:$PATH"
 #fi
 
 # Making duckduckgo the default page (variable for lynx)
