@@ -38,3 +38,6 @@
 # konsole
 !.config/konsole.css
 !.config/konsolerc
+
+# direnv
+!.config/direnv/direnvrc
