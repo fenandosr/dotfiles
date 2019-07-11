@@ -44,9 +44,6 @@ source ~/antigen.zsh
 # Libraries
 #
 
-# direnv
-eval "$(direnv hook zsh)"
-
 # I used to load the oh-my-zsh's library
 # antigen use oh-my-zsh
 
