@@ -663,6 +663,10 @@ let g:ycm_filetype_blacklist = {
 \ 'gitcommit': 1,
 \}
 
+" Close the preview when leaving insert mode
+" https://vi.stackexchange.com/questions/4056/is-there-an-easy-way-to-close-a-scratch-buffer-preview-window
+let g:ycm_autoclose_preview_window_after_insertion = 1
+
 "
 " CScope bindings
 "
