@@ -53,6 +53,8 @@ eval "$(direnv hook zsh)"
 # Load the fenandos library
 antigen bundle fenandosr/zsh-files
 
+# direnv hook
+eval "$(direnv hook zsh)"
 
 #
 # Antigen Theme

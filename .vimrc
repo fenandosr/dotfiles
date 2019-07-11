@@ -55,8 +55,8 @@ endfunction
 " This is great for highlighting parts of the code. Just call the function
 " again to deselect everything.
 function! ToggleSelected(visual) range
-    highlight HideSelected ctermfg=bg ctermbg=bg
-                         \ guifg=bg guibg=bg gui=none term=none cterm=none
+    highlight HideSelected ctermfg=black ctermbg=black
+                         \ guifg=black guibg=black gui=none term=none cterm=none
 
     if exists('g:toggle_selected_hide')
         call matchdelete(g:toggle_selected_hide)
@@ -339,7 +339,7 @@ if !s:plugins
 " Borrowed from @justinmk's vimrc
 fun! InstallVundle()
     silent call mkdir(expand('~/.vim/bundle', 1), 'p')
-    silent !git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+    silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/vundle
 endfun
 
 " Instead of install packages, install Vundle
@@ -358,7 +358,7 @@ call vundle#rc()
 " Vundle Bundles + Settings
 "
 
-Plugin 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 
 " Git/GitHub plugins
 Plugin 'airblade/vim-gitgutter'
@@ -383,6 +383,7 @@ Plugin 'bitc/vim-bad-whitespace'
 
 " Buffers
 Plugin 'jeetsukumaran/vim-buffergator'
+Plugin 'mtth/scratch.vim'
 
 " Syntax
 Plugin 'scrooloose/syntastic'
