@@ -402,6 +402,7 @@ Plugin 'shougo/vimproc'
 Plugin 'shougo/vimshell'
 Plugin 'tpope/vim-commentary'
 Plugin 'fenandosr/taskpaper.vim'
+Plugin 'direnv/direnv.vim'
 
 " Format and beautifiers
 Plugin 'Chiel92/vim-autoformat'
