@@ -26,16 +26,13 @@
 # vim
 !/.vimrc
 
-# neovim
-!/.config
-/.config/*
-!.config/nvim
-
 # tmux
 !/.tmux.conf
 
 # thyme integration
 !/.thymerc
+
+# Misc
 .Rproj.user
 
 # konsole

@@ -1,8 +1,8 @@
 [Desktop Entry]
-DefaultProfile=Profile 1.profile
+DefaultProfile=konsole.profile
 
 [Favorite Profiles]
-Favorites=Profile 1.profile
+Favorites=
 
 [KonsoleWindow]
 AllowMenuAccelerators=true
