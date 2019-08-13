@@ -293,12 +293,13 @@ if has('gui_running')
     " Ensure that clipboard isn't clobbered when yanking
     set guioptions-=a
 
-    " Let's make the fonts look nice
-    if s:OS == 'osx'
-        set guifont=Droid\ Sans\ Mono\ for\ Powerline:h11
-    elseif s:OS == 'linux'
-        set guifont=Hack\ 12
-    endif
+endif
+
+" Let's make the fonts look nice
+if s:OS == 'osx'
+    set guifont=Droid\ Sans\ Mono\ for\ Powerline:h11
+elseif s:OS == 'linux'
+    set guifont=Hack\ Regular\ for\ Powerline\ 12
 endif
 
 " Ignore some defaults
@@ -567,6 +568,7 @@ let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
+"let g:webdevicons_enable_airline_statusline_fileformat_symbols = 0
 
 " Whitespace settings
 
