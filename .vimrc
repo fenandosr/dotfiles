@@ -420,16 +420,10 @@ Plugin 'LaTeX-Box-Team/LaTeX-Box'
 " Autocompletion
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-surround'
-Plugin 'Valloric/YouCompleteMe'
 
 " Snippets
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-
-" Ruby plugins
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'tpope/vim-cucumber'
-Plugin 'tpope/vim-bundler'
 
 " Themes
 Plugin 'freeo/vim-kalisi'
