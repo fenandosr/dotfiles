@@ -9,6 +9,7 @@
 !/.local/
 /.local/*
 !.local/bin
+/.local/bin/*
 
 # teamocil yaml files
 !/.teamocil/
@@ -31,13 +32,6 @@
 
 # thyme integration
 !/.thymerc
-
-# Misc
-.Rproj.user
-
-# konsole
-!.config/konsole.css
-!.config/konsolerc
 
 # direnv
 !.config/direnv/direnvrc
