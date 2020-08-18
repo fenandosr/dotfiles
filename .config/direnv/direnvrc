@@ -1,6 +1,8 @@
 realpath() {
     [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
 }
+
+# Python env
 layout_python-venv() {
     local python=${1:-python3}
     [[ $# -gt 0 ]] && shift
@@ -22,4 +24,19 @@ layout_python-venv() {
         "$python" -m venv "$VIRTUAL_ENV"
     fi
     PATH_add "$VIRTUAL_ENV/bin"
+}
+
+# Poetry
+layout_poetry() {
+  if [[ ! -f pyproject.toml ]]; then
+    log_error 'No pyproject.toml found. Use `poetry new` or `poetry init` to create one first.'
+    exit 2
+  fi
+
+  # create venv if it doesn't exist
+  poetry run true
+
+  export VIRTUAL_ENV=$(poetry env info --path)
+  export POETRY_ACTIVE=1
+  PATH_add "$VIRTUAL_ENV/bin"
 }
