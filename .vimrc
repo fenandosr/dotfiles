@@ -1,12 +1,9 @@
-" Author:        Josh Davis, I just nodded to myself
-" Description:   This is the personal .vimrc file of (Fernando Rivas)
-"
-" As the help says 'Make vim behave in a more useful way'
+" Personal vim
 " **Must be first uncommented line**
 set nocompatible
 
 "
-" Determine what we have
+" Determine the system
 "
 
 let s:OS = 'linux'
@@ -15,8 +12,6 @@ let os = substitute(system('uname'), '\n', '', '')
 if os == 'Darwin' || os == 'Mac'
     let s:OS = 'osx'
 endif
-
-set shell=/bin/bash
 
 let s:plugins=isdirectory(expand('~/.vim/bundle/vundle', 1))
 
@@ -422,6 +417,7 @@ Plugin 'LaTeX-Box-Team/LaTeX-Box'
 " Autocompletion
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-surround'
+Plugin 'ycm-core/YouCompleteMe'
 
 " Snippets
 Plugin 'SirVer/ultisnips'
