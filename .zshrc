@@ -1,11 +1,10 @@
 #
 # Global fixes
 #
-
 # Ensure languages are set
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
+#export LC_ALL=en_US.UTF-8
 
 # Ensure editor is set
 export EDITOR=vim
@@ -13,12 +12,11 @@ export EDITOR=vim
 #
 # OS Detection
 #
-
 UNAME=`uname`
 
 # Fallback info
 CURRENT_OS='Linux'
-DISTRO=''
+DISTRO='Debian'
 
 if [[ $UNAME == 'Darwin' ]]; then
     CURRENT_OS='OS X'
@@ -37,36 +35,23 @@ fi
 #
 # Load Antigen
 #
-
 source ~/antigen.zsh
 
 #
 # Libraries
 #
-
-# I used to load the oh-my-zsh's library
-# antigen use oh-my-zsh
-
-# Load the fenandos library
+# Load fenandos
 antigen bundle fenandosr/zsh-files
+antigen theme fenandosr/zsh-files themes/fenandosr
 
 # direnv hook
 eval "$(direnv hook zsh)"
 
 #
-# Antigen Theme
-#
-
-antigen theme fenandosr/zsh-files themes/jdavis
-
-
-#
 # Antigen Bundles
 #
-
 antigen bundle git
 antigen bundle heroku
-antigen bundle rupa/z
 antigen bundle lein
 antigen bundle command-not-found
 
@@ -102,4 +87,3 @@ fi
 
 # Antigen, I'm done.
 antigen apply
-
