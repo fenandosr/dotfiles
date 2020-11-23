@@ -16,6 +16,8 @@ if os == 'Darwin' || os == 'Mac'
     let s:OS = 'osx'
 endif
 
+set shell=/bin/bash
+
 let s:plugins=isdirectory(expand('~/.vim/bundle/vundle', 1))
 
 "
@@ -433,7 +435,16 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'hynek/vim-python-pep8-indent'
 Plugin 'nvie/vim-flake8'
 
+" Load devicons
+Plugin 'ryanoasis/vim-devicons'
+
+
 let g:color_schemes = ['vim-kalisi', 'vim-colorschemes']
+
+" Must be loaded after all color scheme plugins
+if HasColorScheme('atom') && s:plugins
+    colorscheme atom
+endif
 
 nmap <leader>t? :map <leader>t<cr>
 nmap <leader>tB :VimFiler<cr>
@@ -784,9 +795,6 @@ endfunction
 " End the conditional for plugins
 endif
 
-" Load devicons
-Plugin 'ryanoasis/vim-devicons'
-
 " Load plugins and indent for the filtype
 " **Must be last for Vundle**
 filetype plugin indent on
@@ -809,7 +817,3 @@ set t_Co=256
 set t_AB=[48;5;%dm
 set t_AF=[38;5;%dm
 
-" Must be loaded after all color scheme plugins
-if HasColorScheme('atom') && s:plugins
-    colorscheme atom
-endif
