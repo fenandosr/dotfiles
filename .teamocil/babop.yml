@@ -1,0 +1,8 @@
+windows:
+  - name: Bit-a-Bit OP
+    root: ~/Bit-a-Bit/OP
+    layout: even-horizontal
+    panes:
+      - ls -AlFh
+      - date
+      - echo hola

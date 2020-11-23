@@ -1,9 +1,9 @@
 windows:
   - name: Bit-a-Bit
-    root: ~/Works/Bit-a-Bit
+    root: ~/Bit-a-Bit
     layout: tiled
     panes:
       - ls -AlFh
-      - ls -AlFh 00_Andando/
-      - ls -AlFh 01_Prospectos/
-      - ls -AlFh CICD/
+      - date
+      - whoami
+      - ls
