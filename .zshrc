@@ -47,6 +47,8 @@ antigen theme fenandosr/zsh-files themes/fenandosr
 # direnv hook
 eval "$(direnv hook zsh)"
 
+fpath=(~/.antigen/bundles/fenandosr/zsh-files/completion $fpath)
+
 #
 # Antigen Bundles
 #
@@ -87,3 +89,7 @@ fi
 
 # Antigen, I'm done.
 antigen apply
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/fer/.sdkman"
+[[ -s "/home/fer/.sdkman/bin/sdkman-init.sh" ]] && source "/home/fer/.sdkman/bin/sdkman-init.sh"
