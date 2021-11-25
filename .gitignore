@@ -5,24 +5,16 @@
 
 !/.gitignore
 
-# user bin
-!/.local/
-/.local/*
-!.local/bin
-/.local/bin/*
-
-# teamocil yaml files
-!/.teamocil/
+# cookiecutters
+!/.cookiecutterrc
 
 # bash and zsh
 !/.bashrc
 !/.bash_aliases
-!/.bash_goodies
 !/.zshrc
 
 # git
-/git-completion.bash
-/git-prompt.sh
+/.gitconfig
 
 # vim
 !/.vimrc

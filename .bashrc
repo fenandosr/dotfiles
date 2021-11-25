@@ -150,3 +150,4 @@ export WWW_HOME
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/fer/.sdkman"
 [[ -s "/home/fer/.sdkman/bin/sdkman-init.sh" ]] && source "/home/fer/.sdkman/bin/sdkman-init.sh"
+source "$HOME/.cargo/env"

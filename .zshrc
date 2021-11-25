@@ -32,64 +32,39 @@ else
     fi
 fi
 
-#
-# Load Antigen
-#
-source ~/antigen.zsh
+# OS specific plugins
+if [[ $CURRENT_OS == 'OS X' ]]; then
+    # Not even have one
+elif [[ $CURRENT_OS == 'Linux' ]]; then
+    # None so far...
+elif [[ $CURRENT_OS == 'Cygwin' ]]; then
+    # ...
+fi
 
 #
-# Libraries
+# Configuration
 #
-# Load fenandos
-antigen bundle fenandosr/zsh-files
-antigen theme fenandosr/zsh-files themes/fenandosr
 
 # direnv hook
 eval "$(direnv hook zsh)"
 
-fpath=(~/.antigen/bundles/fenandosr/zsh-files/completion $fpath)
+# pyenv
+eval "$($HOME/.pyenv/bin/pyenv init -)"
 
-#
-# Antigen Bundles
-#
-antigen bundle git
-antigen bundle heroku
-antigen bundle lein
-antigen bundle command-not-found
+# zsh-users
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zsh/z/z.sh
+# completions
+autoload -U compinit && compinit
+fpath=(~/.zsh/zsh-completions/src $fpath)
 
-# Syntax highlighting bundle
-antigen bundle zsh-users/zsh-syntax-highlighting
+# personal
+source ~/.zsh/fenandosr/zsh-files/init.zsh
 
-# For SSH, starting ssh-agent is annoying
-antigen bundle ssh-agent
-
-# Node Plugins
-antigen bundle coffee
-antigen bundle node
-
-# Python Plugins
-antigen bundle pip
-antigen bundle python
-antigen bundle virtualenv
-
-# OS specific plugins
-if [[ $CURRENT_OS == 'OS X' ]]; then
-    antigen bundle brew
-    antigen bundle brew-cask
-    antigen bundle gem
-elif [[ $CURRENT_OS == 'Linux' ]]; then
-    # None so far...
-
-    if [[ $DISTRO == 'CentOS' ]]; then
-        antigen bundle centos
-    fi
-elif [[ $CURRENT_OS == 'Cygwin' ]]; then
-    antigen bundle cygwin
+if [ -d "$HOME/.sdkman" ]
+then
+    export SDKMAN_DIR="$HOME/.sdkman"
+    [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 fi
 
-# Antigen, I'm done.
-antigen apply
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/fer/.sdkman"
-[[ -s "/home/fer/.sdkman/bin/sdkman-init.sh" ]] && source "/home/fer/.sdkman/bin/sdkman-init.sh"
