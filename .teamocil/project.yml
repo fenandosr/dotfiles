@@ -1,6 +1,0 @@
-windows:
-  - name: project-home
-    layout: 13c7,191x51,0,0[191x39,0,0,4,191x11,0,40,5]
-    panes:
-      - git status
-      - ls -AlFh

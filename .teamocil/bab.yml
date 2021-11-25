@@ -1,9 +1,0 @@
-windows:
-  - name: Bit-a-Bit
-    root: ~/Bit-a-Bit
-    layout: tiled
-    panes:
-      - ls -AlFh
-      - date
-      - whoami
-      - ls
