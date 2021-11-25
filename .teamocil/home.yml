@@ -1,8 +1,0 @@
-windows:
-  - name: this-is-my-home
-    root: ~/
-    layout: e842,190x52,0,0[190x27,0,0,1,190x24,0,28{97x24,0,28,2,92x24,98,28,3}]
-    panes:
-      - git status
-      - ll -AlFh
-      - htop
