@@ -26,5 +26,13 @@
 # thyme integration
 !/.thymerc
 
+#
+# config folfer
+#
+
+# git
+!/.config/git/ignore
+
+
 # direnv
 !/.config/direnv/direnvrc
