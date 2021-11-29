@@ -360,93 +360,101 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Git/GitHub plugins
 Plugin 'airblade/vim-gitgutter'
+" > A Vim plugin which shows git diff markers in the sign column
+" > and stages/previews/undoes hunks and partial hunks.
 Plugin 'tpope/vim-fugitive'
+" > The crown jewel of Fugitive is :Git (or just :G),
+" >  which calls any arbitrary Git command.
 Plugin 'tpope/vim-git'
-Plugin 'mattn/webapi-vim'
-Plugin 'mattn/gist-vim'
+" > :DiffGitCached, is provided to show a diff of the current commit
+" > in the preview window.
 
 " File overview
 Plugin 'Shougo/unite.vim'
+" > Run unite to display files and buffers as sources to pick from.
 Plugin 'Shougo/vimfiler.vim'
+" > A powerful file explorer implemented in Vim script
 
 " Navigation
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'mileszs/ack.vim'
+" > Full path fuzzy file, buffer, mru, tag, ... finder for Vim.
 
 " Appearance
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+" > Nice statusline at the bottom of each vim window.
 Plugin 'vim-airline/vim-airline-themes'
+" > Use :AirlineTheme <theme> to set the theme
 Plugin 'bitc/vim-bad-whitespace'
+" > Highlights whitespace at the end of lines
 
 " Buffers
 Plugin 'jeetsukumaran/vim-buffergator'
+" > Vim plugin to list, select and switch between buffers.
 Plugin 'mtth/scratch.vim'
+" > Unobtrusive scratch window.
 
 " Syntax
-Plugin 'scrooloose/syntastic'
+Plugin 'vim-syntastic/syntastic'
+" > Syntax checking hacks for vim.
 Plugin 'pangloss/vim-javascript'
+" > JavaScript bundle for vim, this bundle provides
+" > syntax highlighting and improved indentation.
 Plugin 'tpope/vim-markdown'
+" > Vim Markdown runtime files.
 
 " Utilities
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'takac/vim-commandcaps'
+Plugin 'easymotion/vim-easymotion'
+" > Provides a much simpler way to use some motions in vim.
 Plugin 'mbbill/undotree'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'benmills/vimux'
-Plugin 'vim-scripts/SyntaxRange'
+" > The undo history visualizer.
+Plugin 'mg979/vim-visual-multi'
+" > Multiple cursors.
+Plugin 'preservim/vimux'
+" > Easily interact with tmux from vim.
 Plugin 'tpope/vim-speeddating'
+" > Use CTRL-A/CTRL-X to increment dates, times, and more.
 Plugin 'tpope/vim-repeat'
-Plugin 'shougo/vimproc'
+" > Enable repeating supported plugin maps with '.'.
 Plugin 'shougo/vimshell'
+" > Powerful shell implemented by vim.
 Plugin 'tpope/vim-commentary'
+" > Comment stuff out.
 Plugin 'fenandosr/taskpaper.vim'
 Plugin 'direnv/direnv.vim'
 
-" Format and beautifiers
-Plugin 'Chiel92/vim-autoformat'
-
-" Vim improvements
-Plugin 'embear/vim-localvimrc'
-
 " R Lang
-Plugin 'jalvesaq/VimCom'
-Plugin 'jcfaria/Vim-R-plugin'
-Plugin 'LaTeX-Box-Team/LaTeX-Box'
+Plugin 'jalvesaq/nvim-r'
 
 " Autocompletion
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-surround'
+" > Delete/change/add parentheses/quotes/XML-tags/much more with ease.
 Plugin 'ycm-core/YouCompleteMe'
 
 " Snippets
 Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
 
 " Themes
 Plugin 'freeo/vim-kalisi'
-Plugin 'flazz/vim-colorschemes'
 
 " Python
-Plugin 'hynek/vim-python-pep8-indent'
+Plugin 'vimjas/vim-python-pep8-indent'
 Plugin 'nvie/vim-flake8'
 
 " Load devicons
 Plugin 'ryanoasis/vim-devicons'
 
-
-let g:color_schemes = ['vim-kalisi', 'vim-colorschemes']
+let g:color_schemes = ['vim-kalisi']
 
 " Must be loaded after all color scheme plugins
-if HasColorScheme('atom') && s:plugins
-    colorscheme atom
+if HasColorScheme('papercolor') && s:plugins
+    colorscheme papercolor
 endif
 
 nmap <leader>t? :map <leader>t<cr>
 nmap <leader>tB :VimFiler<cr>
 nmap <leader>tb :VimFilerExplorer<cr>
 nmap <leader>tW :cal StripTrailingWhitespace()<cr>
-nmap <leader>tt :TagbarToggle<cr>
 nmap <leader>tu :UndotreeToggle<cr>
 nmap <leader>tw :cal ToggleWhitespace()<cr>
 
@@ -508,8 +516,6 @@ let g:syntastic_auto_loc_list = 2
 let g:syntastic_enable_signs = 1
 let g:syntastic_java_checkers = ['checkstyle', 'javac']
 let g:syntastic_java_javac_delete_output = 1
-"let g:syntastic_java_checkstyle_conf_file = '~/bin/jars/sun_checks.xml'
-"let g:syntastic_java_checkstyle_classpath = '~/bin/jars/checkstyle-5.5-all.jar'
 let g:syntastic_filetype_map = { 'rnoweb': 'tex'}
 
 " UltiSnip options
@@ -517,7 +523,6 @@ let g:UltiSnipsExpandTrigger="<C-SPACE>"
 
 
 " CtrlP Settings
-
 let g:ctrlp_user_command = {
             \ 'types': {
             \ 1: ['.git', 'cd %s && git ls-files --exclude-standard --others --cached'],
@@ -598,15 +603,6 @@ map <space>l <Plug>(easymotion-linebackward)
 
 let g:EasyMotion_startofline = 0
 
-" Tagbar Options
-let g:tagbar_left = 0
-let g:tagbar_width = 30
-
-" Ack options
-nmap <leader>/ :Ack!<space>
-let g:ackpreview = 2
-let g:ackhighlight = 1
-
 " Undotree settings
 let g:undotree_SplitWidth = 30
 let g:undotree_WindowLayout = 3
@@ -620,19 +616,7 @@ let g:multi_cursor_quit_key = '<Esc>'
 
 " Worthless mapping
 let g:vimrplugin_assign = 0
-
-" Disable ridiculous mappings
 let g:vimrplugin_insert_mode_cmds = 0
-
-" The powers of Gitignore + wildignore combine!
-" Originally written by @zdwolfe, updated by @mikewadsten
-"Bundle 'mikewadsten/vim-gitwildignore'
-
-" LaTex-Box Settings
-let g:LatexBox_latexmk_async = 1
-let g:LatexBox_latexmk_preview_continuously = 1
-let g:LatexBox_viewer = 'open -a Skim.app'
-let g:LatexBox_viewer = 'mate-open'
 
 "
 " Buffergator Options
@@ -641,9 +625,6 @@ let g:LatexBox_viewer = 'mate-open'
 let g:buffergator_suppress_keymaps = 1
 let g:buffergator_viewport_split_policy = "R"
 let g:buffergator_autoexpand_on_split = 0
-
-" Looper!
-"let g:buffergator_mru_cycle_loop = 1
 
 nmap <leader>T :enew<cr>
 nmap <leader>jj :BuffergatorMruCyclePrev<cr>
@@ -670,50 +651,6 @@ let g:ycm_filetype_blacklist = {
 " Close the preview when leaving insert mode
 " https://vi.stackexchange.com/questions/4056/is-there-an-easy-way-to-close-a-scratch-buffer-preview-window
 let g:ycm_autoclose_preview_window_after_insertion = 1
-
-"
-" CScope bindings
-"
-" Cheat Sheet:
-"
-"   's'   symbol: find all references to the token under cursor
-"   'g'   global: find global definition(s) of the token under cursor
-"   'c'   calls:  find all calls to the function name under cursor
-"   't'   text:   find all instances of the text under cursor
-"   'e'   egrep:  egrep search for the word under cursor
-"   'f'   file:   open the filename under cursor
-"   'i'   includes: find files that include the filename under cursor
-"   'd'   called: find functions that function under cursor calls
-
-if has("cscope")
-    " use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
-    set cscopetag
-
-    " check cscope for definition of a symbol before checking ctags: set to 1
-    " if you want the reverse search order.
-    set csto=0
-
-    " add any cscope database in current directory
-    if filereadable("cscope.out")
-        cs add cscope.out
-    " else add the database pointed to by environment variable
-    elseif $CSCOPE_DB != ""
-        cs add $CSCOPE_DB
-    endif
-
-    " show msg when any other cscope db added
-    set cscopeverbose
-
-    nmap <leader>c? :ec 'Cscope reference'                       <bar> map <leader>c<cr>
-    nmap <leader>cc :ec 'Find all calls to function'             <bar> cs find c <C-R>=expand("<cword>")<CR><CR>
-    nmap <leader>cd :ec 'Find functions that call this function' <bar> cs find d <C-R>=expand("<cword>")<CR><CR>
-    nmap <leader>ce :ec 'egrep search for the word under cursor' <bar> cs find e <C-R>=expand("<cword>")<CR><CR>
-    nmap <leader>cf :ec 'Open filename under cursor'             <bar> cs find f <C-R>=expand("<cfile>")<CR><CR>
-    nmap <leader>cg :ec 'Find all global definitions'            <bar> cs find g <C-R>=expand("<cword>")<CR><CR>
-    nmap <leader>ci :ec 'Find files that include the filename'   <bar> cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-    nmap <leader>cs :ec 'Find all references'                    <bar> cs find s <C-R>=expand("<cword>")<CR><CR>
-    nmap <leader>ct :ec 'Find all instances to text'             <bar> cs find t <C-R>=expand("<cword>")<CR><CR>
-endif
 
 "
 " Vimux Settings
@@ -812,4 +749,3 @@ set background=dark
 set t_Co=256
 set t_AB=[48;5;%dm
 set t_AF=[38;5;%dm
-
