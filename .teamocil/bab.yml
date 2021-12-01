@@ -1,0 +1,9 @@
+name: Bit-a-Bit
+windows:
+  - name: Bit-dashboard
+    layout: tiled
+    panes:
+      - ls -AlFh
+      - date
+      - whoami
+      - ls

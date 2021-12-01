@@ -15,13 +15,18 @@
 !/.zprofile
 
 # git
-/.gitconfig
+!/.gitconfig
 
 # vim
 !/.vimrc
 
 # tmux
 !/.tmux.conf
+
+# teamocil
+!/.teamocil/
+!/.teamocil/bab.yml
+!/.teamocil/home.yml
 
 # thyme integration
 !/.thymerc
