@@ -111,3 +111,4 @@ fi
 # Making duckduckgo the default page
 WWW_HOME='https://www.duckduckgo.com'
 export WWW_HOME
+

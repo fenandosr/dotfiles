@@ -60,11 +60,4 @@ autoload -U compinit && compinit
 fpath=(~/.zsh/zsh-completions/src $fpath)
 
 # personal
-source ~/.zsh/fenandosr/zsh-files/init.zsh
-
-if [ -d "$HOME/.sdkman" ]
-then
-    export SDKMAN_DIR="$HOME/.sdkman"
-    [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-fi
-
+source ~/.zsh/zsh-files/init.zsh
