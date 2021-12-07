@@ -112,3 +112,4 @@ fi
 WWW_HOME='https://www.duckduckgo.com'
 export WWW_HOME
 
+. "$HOME/.cargo/env"

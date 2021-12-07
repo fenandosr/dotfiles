@@ -1,0 +1,13 @@
+license = "BSD3"
+version_control = "git"
+version = "0.1.0"
+
+[author]
+name = "Fernando Rivas"
+email = "fernando@bit-a-bit.info"
+github_username = "fenandosr"
+
+# put any custom keys you want under a [[user]] table
+[[user]]
+website = "https://bit-a-bit.info"
+

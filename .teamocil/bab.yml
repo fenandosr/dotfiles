@@ -5,5 +5,5 @@ windows:
     panes:
       - ls -AlFh
       - date
-      - whoami
-      - ls
+      - cd ~/Bit-a-Bit
+      - cd ~/Bit-a-Bit
