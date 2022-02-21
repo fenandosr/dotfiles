@@ -61,3 +61,4 @@ fpath=(~/.zsh/zsh-completions/src $fpath)
 
 # personal
 source ~/.zsh/zsh-files/init.zsh
+
