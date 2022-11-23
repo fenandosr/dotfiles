@@ -32,33 +32,52 @@ else
     fi
 fi
 
-# OS specific plugins
-if [[ $CURRENT_OS == 'OS X' ]]; then
-    # Not even have one
-elif [[ $CURRENT_OS == 'Linux' ]]; then
-    # None so far...
-elif [[ $CURRENT_OS == 'Cygwin' ]]; then
-    # ...
-fi
-
 #
 # Configuration
 #
 
-# direnv hook
-eval "$(direnv hook zsh)"
-
-# pyenv
-eval "$($HOME/.pyenv/bin/pyenv init -)"
-
 # zsh-users
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.zsh/z/z.sh
+#source ~/.zsh/z/z.sh
 # completions
 autoload -U compinit && compinit
 fpath=(~/.zsh/zsh-completions/src $fpath)
 
 # personal
 source ~/.zsh/zsh-files/init.zsh
+
+# direnv hook
+eval "$(direnv hook zsh)"
+
+# pyenv
+eval "$(pyenv init -)"
+
+# OS specific
+if [[ $CURRENT_OS == 'OS X' ]]; then
+    # Antigen
+    source ~/antigen.zsh
+    antigen bundle agkozak/zsh-z
+    antigen apply
+elif [[ $CURRENT_OS == 'Linux' ]]; then
+    # None so far...
+elif [[ $CURRENT_OS == 'Cygwin' ]]; then
+    # ...
+fi
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/homebrew/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/homebrew/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/homebrew/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/homebrew/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 
