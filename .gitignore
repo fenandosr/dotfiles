@@ -1,41 +1,24 @@
 # Ignore everything
 /*
-
 # But not these files...
-
-!/.gitignore
 
 # cookiecutters
 !/.cookiecutterrc
-!/.pi.toml
 
 # bash and zsh
 !/.bashrc
 !/.bash_aliases
 !/.zshrc
-!/.zprofile
 
 # git
 !/.gitconfig
+!/.gitignore
 
 # vim
 !/.vimrc
 
 # tmux
 !/.tmux.conf
-
-# teamocil
-!/.teamocil/
-!/.teamocil/bab.yml
-!/.teamocil/home.yml
-
-#
-# config folfer
-#
-
-# git
-!/.config/git/ignore
-
 
 # direnv
 !/.config/direnv/direnvrc
