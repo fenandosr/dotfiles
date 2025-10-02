@@ -28,3 +28,8 @@ source $HOME/.zsh/zsh-syntax-highlighting
 # personal repo
 source $HOME/.zsh/zsh-files/init.zsh
 
+bindkey -e
+bindkey '\e\e[C' forward-word
+bindkey '\e\e[D' backward-word 
+
+. "$HOME/.local/bin/env"
