@@ -1,0 +1,59 @@
+## ~/bin/r53_add_record
+#!/usr/bin/env bash
+## Add record to a Route53 hosted zone
+
+set -euo pipefail
+
+## usage: r53_add_record domain MS=value [type] [ttl]
+domain="${1:-}"
+value="${2:-}"
+rtype="${3:-TXT}"
+ttl="${4:-3600}"
+
+if [[ -z "$domain" || -z "$value" ]]; then
+  echo "usage: r53_add_record domain MS=value [type] [ttl]"
+  exit 1
+fi
+
+## clean trailing dot
+domain="${domain%.}"
+
+## get hosted zone ID
+hz_id="$(aws route53 list-hosted-zones-by-name \
+  --dns-name "$domain" \
+  --query 'HostedZones[0].Id' \
+  --output text)"
+
+if [[ "$hz_id" == "None" || -z "$hz_id" ]]; then
+  echo "## Hosted zone for $domain not found."
+  exit 2
+fi
+
+## prepare change batch
+tmpfile="$(mktemp)"
+cat > "$tmpfile" <<EOF
+{
+  "Comment": "Add $rtype record for $domain",
+  "Changes": [{
+    "Action": "UPSERT",
+    "ResourceRecordSet": {
+      "Name": "@.$domain.",
+      "Type": "$rtype",
+      "TTL": $ttl,
+      "ResourceRecords": [
+        {"Value": "\"$value\""}
+
+    }
+  }]
+}
+EOF
+
+## apply change
+aws route53 change-resource-record-sets \
+  --hosted-zone-id "$hz_id" \
+  --change-batch file://"$tmpfile"
+
+echo "## TXT record added for $domain with value \"$value\" (TTL $ttl)"
+
+rm -f "$tmpfile"
+

@@ -1,0 +1,31 @@
+## ~/bin/genkey
+#!/bin/bash
+## Generate SSH key and print public key for GitHub
+
+## usage: genkey [-t type] keyname [comment]
+
+type="ed25519"
+
+## parse optional -t flag
+if [[ "$1" == "-t" ]]; then
+  type="$2"
+  shift 2
+fi
+
+keyname="$1"
+comment="$2"
+
+if [[ -z "$keyname" ]]; then
+  echo "usage: genkey [-t type] keyname [comment]"
+  exit 1
+fi
+
+ssh-keygen -t "$type" -C "${comment:-}" -f "$HOME/.ssh/$keyname"
+
+## show public key for GitHub copy
+echo
+echo "## Public key to copy into GitHub:"
+echo
+cat "$HOME/.ssh/${keyname}.pub"
+echo
+

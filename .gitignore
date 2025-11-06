@@ -1,16 +1,17 @@
 # Ignore everything
 /*
+
 # But not these files...
 
-# cookiecutters
+## cookiecutters
 !/.cookiecutterrc
 
-# bash and zsh
+## bash and zsh
 !/.bashrc
 !/.bash_aliases
 !/.zshrc
 
-# git
+## git
 !/.gitconfig
 !/.gitignore
 
@@ -20,5 +21,10 @@
 # tmux
 !/.tmux.conf
 
-# direnv
+# config
 !/.config/direnv/direnvrc
+!/.config/ranger/rc.conf
+
+## bin
+!/bin/
+

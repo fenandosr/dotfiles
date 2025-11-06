@@ -1,0 +1,66 @@
+## ~/bin/aws_perms_check
+#!/usr/bin/env bash
+## Verify AWS CLI auth and required permissions (Route53/Route53Domains)
+
+set -u -o pipefail
+
+## deps
+command -v aws >/dev/null || { echo "## aws cli not found"; exit 2; }
+command -v jq  >/dev/null || { echo "## jq not found (apt install jq / apk add jq / brew install jq)"; exit 2; }
+
+## identity
+echo "## Checking identity…"
+acct_json="$(aws sts get-caller-identity --output json 2>&1)" || { echo "## sts get-caller-identity failed:"; echo "$acct_json"; exit 1; }
+account_id="$(echo "$acct_json" | jq -r '.Account')"
+principal_arn="$(echo "$acct_json" | jq -r '.Arn')"
+echo "## Account: $account_id"
+echo "## Principal: $principal_arn"
+
+## quick live checks (read-only where possible)
+echo "## Route53: list-hosted-zones (read)"
+r53_list="$(aws route53 list-hosted-zones --max-items 1 2>&1)" \
+  && echo "## OK: list-hosted-zones" \
+  || { echo "## FAIL: list-hosted-zones"; echo "$r53_list"; }
+
+echo "## Route53Domains: list-prices for .com (read, us-east-1)"
+r53d_prices="$(aws route53domains list-prices --region us-east-1 --tlds com 2>&1)" \
+  && echo "## OK: list-prices" \
+  || { echo "## FAIL: list-prices"; echo "$r53d_prices"; }
+
+echo "## Route53Domains: check-domain-availability example.com (read, us-east-1)"
+r53d_avail="$(aws route53domains check-domain-availability --region us-east-1 --domain-name example.com 2>&1)" \
+  && echo "## OK: check-domain-availability" \
+  || { echo "## FAIL: check-domain-availability"; echo "$r53d_avail"; }
+
+## IAM simulation (best-effort; works for users/roles in same account)
+actions=(
+  "route53:ListHostedZonesByName"
+  "route53:CreateHostedZone"
+  "route53:GetHostedZone"
+  "route53:ChangeResourceRecordSets"
+  "route53domains:CheckDomainAvailability"
+  "route53domains:ListPrices"
+  "route53domains:RegisterDomain"
+)
+
+echo "## IAM simulate-principal-policy for required actions"
+sim_out="$(aws iam simulate-principal-policy \
+  --policy-source-arn "$principal_arn" \
+  --action-names "${actions[@]}" \
+  --output json 2>&1)"
+
+if [[ $? -ne 0 ]]; then
+  echo "## SIMULATION FAILED (possible cross-account role or missing iam:SimulatePrincipalPolicy)"
+  echo "$sim_out"
+else
+  echo "$sim_out" | jq -r '
+    .EvaluationResults[] |
+    "\(.EvalActionName): \(.EvalDecision) (\([.MatchedStatements[]?.SourcePolicyId] | join(",")))"
+  '
+fi
+
+## summary tip
+echo "## Needed perms include:"
+echo "##  - route53:ListHostedZonesByName, CreateHostedZone, GetHostedZone, ChangeResourceRecordSets"
+echo "##  - route53domains:CheckDomainAvailability, ListPrices, RegisterDomain (region us-east-1)"
+

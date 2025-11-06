@@ -1,0 +1,85 @@
+## ~/bin/r53_zone_or_buy
+#!/usr/bin/env bash
+## Create hosted zone if domain is taken; if available, show buy info
+
+set -euo pipefail
+
+## usage: r53_zone_or_buy example.com
+domain="${1:-}"
+if [[ -z "$domain" ]]; then
+  echo "usage: r53_zone_or_buy example.com"
+  exit 1
+fi
+
+## ensure deps
+command -v aws >/dev/null || { echo "## aws cli not found"; exit 2; }
+
+## check availability via Route53 Domains (requires us-east-1)
+availability="$(aws route53domains check-domain-availability \
+  --region us-east-1 \
+  --domain-name "$domain" \
+  --query 'Availability' \
+  --output text 2>/dev/null || echo UNKNOWN)"
+
+## if domain is AVAILABLE -> show purchase info
+if [[ "$availability" == "AVAILABLE" ]]; then
+  tld="${domain##*.}"
+  ## fetch price (may vary by account/region)
+  price_json="$(aws route53domains list-prices --region us-east-1 --tlds "$tld" --output json 2>/dev/null || echo '')"
+  currency="$(echo "$price_json" | jq -r '.Prices[0].RegistrationPrice.Currency // empty' 2>/dev/null || true)"
+  price="$(echo "$price_json" | jq -r '.Prices[0].RegistrationPrice.Price // empty' 2>/dev/null || true)"
+
+  echo "## Domain appears AVAILABLE: $domain"
+  if [[ -n "${price:-}" && -n "${currency:-}" ]]; then
+    echo "## Est. 1-yr registration price: ${price} ${currency}"
+  else
+    echo "## Price lookup not available (permissions/region/TLD)."
+  fi
+
+  cat <<'EOF'
+
+## To register with Route 53 (edit contacts before running):
+aws route53domains register-domain \
+  --region us-east-1 \
+  --domain-name DOMAIN_HERE \
+  --duration-in-years 1 \
+  --auto-renew \
+  --admin-contact file://admin.json \
+  --registrant-contact file://registrant.json \
+  --tech-contact file://tech.json
+
+## Contact JSON templates: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-register.html
+## After purchase completes, re-run this script to create the hosted zone.
+EOF
+  exit 0
+fi
+
+## if domain is TAKEN or UNKNOWN -> ensure hosted zone exists
+echo "## Domain NOT available (status: $availability). Proceeding with hosted zone."
+
+## check existing hosted zone
+hz_json="$(aws route53 list-hosted-zones-by-name \
+  --dns-name "$domain" \
+  --query "HostedZones[?Name==\`$domain.\`]" \
+  --output json)"
+
+hz_id="$(echo "$hz_json" | jq -r '.[0].Id // empty' 2>/dev/null || true)"
+
+if [[ -n "$hz_id" ]]; then
+  echo "## Hosted zone already exists: $hz_id"
+else
+  echo "## Creating hosted zone..."
+  create_out="$(aws route53 create-hosted-zone \
+    --name "$domain" \
+    --caller-reference "$(date +%s%N)" \
+    --output json)"
+  hz_id="$(echo "$create_out" | jq -r '.HostedZone.Id')"
+  echo "## Created: $hz_id"
+fi
+
+## show NS records
+clean_id="${hz_id#/hostedzone/}"
+ns_out="$(aws route53 get-hosted-zone --id "$clean_id" --query 'DelegationSet.NameServers' --output text 2>/dev/null || true)"
+echo "## Name servers (add at your registrar if needed):"
+printf '%s\n' "$ns_out"
+
