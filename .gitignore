@@ -22,8 +22,8 @@
 !/.tmux.conf
 
 # config
-!/.config/direnv/direnvrc
-!/.config/ranger/rc.conf
+!/.config/direnv/*
+!/.config/ranger/*
 
 ## bin
 !/bin/
