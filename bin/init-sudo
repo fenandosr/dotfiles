@@ -1,0 +1,6 @@
+## ~/bin/init-sudo
+#!/usr/bin/env bash
+## add file /etc/sudoers.d/[file]
+echo "$USER ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/$USER-nopasswd
+sudo chmod 440 /etc/sudoers.d/$USER-nopasswd
+sudo visudo -c

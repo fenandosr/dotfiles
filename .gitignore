@@ -1,24 +1,36 @@
 # Ignore everything
 /*
+# Ignore all files and folders recursively
+/**
+
 # But not these files...
 
-# cookiecutters
+## cookiecutters
 !/.cookiecutterrc
 
-# bash and zsh
+## bash and zsh
 !/.bashrc
 !/.bash_aliases
 !/.zshrc
 
-# git
+## git
 !/.gitconfig
 !/.gitignore
 
-# vim
+## vim
 !/.vimrc
 
-# tmux
+## tmux
 !/.tmux.conf
 
-# direnv
-!/.config/direnv/direnvrc
+## config
+!/.config/
+!/.config/direnv/
+!/.config/direnv/**
+!/.config/ranger/
+!/.config/ranger/**
+
+## bin
+!/bin/
+!/bin/**
+
