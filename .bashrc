@@ -42,4 +42,6 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 
-. "$HOME/.local/bin/env"
+[[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
+
+[[ -f "$HOME/.bashrc.local" ]] && . "$HOME/.bashrc.local"

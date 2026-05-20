@@ -1,3 +1,16 @@
 [user]
     email = fenandos@bit-a-bit.org
     name = Fernando Rivas
+
+[core]
+    autocrlf = input
+    editor = vim
+
+[pull]
+    rebase = true
+
+[init]
+    defaultBranch = main
+
+[include]
+    path = ~/.gitconfig.local

@@ -34,3 +34,6 @@
 !/bin/
 !/bin/**
 
+## bootstrap
+!/install.sh
+

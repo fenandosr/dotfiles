@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 # Builtin aliases
 alias ll='ls -AlF'

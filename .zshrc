@@ -21,20 +21,15 @@ export EDITOR="${EDITOR:-vim}"
 # -----------------------------
 case "$OSTYPE" in
   darwin*)
-    # macOS-specific (optional)
-    # Homebrew shellenv (uncomment if you use brew)
-    # if [[ -x /opt/homebrew/bin/brew ]]; then
-    #   eval "$(/opt/homebrew/bin/brew shellenv)"
-    # elif [[ -x /usr/local/bin/brew ]]; then
-    #   eval "$(/usr/local/bin/brew shellenv)"
-    # fi
+    for brew_path in /opt/homebrew/bin/brew /usr/local/bin/brew; do
+      [[ -x "$brew_path" ]] && eval "$("$brew_path" shellenv)" && break
+    done
     ;;
   linux-gnu*)
-    # Linux-specific (optional)
-    # WSL detection example:
-    # if [[ -r /proc/version ]] && grep -qi microsoft /proc/version; then
-    #   :
-    # fi
+    if [[ -r /proc/version ]] && grep -qi microsoft /proc/version; then
+      alias pbcopy='clip.exe'
+      alias pbpaste='powershell.exe -command "Get-Clipboard" 2>/dev/null | tr -d "\r"'
+    fi
     ;;
 esac
 
@@ -69,3 +64,18 @@ if [[ -f "$HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; th
   source "$HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 fi
 
+
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'micromamba shell init' !!
+export MAMBA_EXE="$HOME/.local/bin/micromamba"
+export MAMBA_ROOT_PREFIX="$HOME/micromamba"
+__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__mamba_setup"
+else
+    alias micromamba="$MAMBA_EXE"  # Fallback on help from micromamba activate
+fi
+unset __mamba_setup
+# <<< mamba initialize <<<
+
+[[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
