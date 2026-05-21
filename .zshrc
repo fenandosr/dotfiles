@@ -4,7 +4,7 @@
 export LANG="${LANG:-en_US.UTF-8}"
 export LANGUAGE="${LANGUAGE:-en_US.UTF-8}"
 # Avoid forcing LC_ALL unless needed:
-# export LC_ALL=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 
 # -----------------------------
 # Editor
@@ -52,6 +52,11 @@ compinit -C -d "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
 # -----------------------------
 # Plugins (safe sourcing)
 # -----------------------------
+if [[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]]; then
+  source /usr/share/doc/fzf/examples/key-bindings.zsh
+  #source /usr/share/doc/fzf/examples/completion.zsh
+fi
+
 if [[ -f "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
   source "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
 fi
