@@ -5,12 +5,20 @@
 [core]
     autocrlf = input
     editor = vim
+    excludesfile = ~/.gitignore_global
 
 [pull]
-    rebase = true
+    rebase = false
 
 [init]
     defaultBranch = main
 
 [include]
     path = ~/.gitconfig.local
+
+[alias]
+    st  = status -sb
+    lg  = log --oneline --graph --decorate --all
+    co  = checkout
+    br  = branch
+    undo = reset HEAD~1 --mixed

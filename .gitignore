@@ -17,6 +17,10 @@
 !/.gitconfig
 !/.gitignore
 
+## docs
+!/README.md
+!/INSTALL_UBUNTU.md
+
 ## vim
 !/.vimrc
 
@@ -29,6 +33,9 @@
 !/.config/direnv/**
 !/.config/ranger/
 !/.config/ranger/**
+!/.config/wtf/
+!/.config/wtf/**
+.config/wtf/log.txt
 
 ## bin
 !/bin/
