@@ -29,6 +29,8 @@
 !/.config/direnv/**
 !/.config/ranger/
 !/.config/ranger/**
+!/.config/wtf/
+!/.config/wtf/**
 
 ## bin
 !/bin/

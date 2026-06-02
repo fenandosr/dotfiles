@@ -1,5 +1,3 @@
-#!bin/bash
-
 # Builtin aliases
 alias ll='ls -AlF'
 alias la='ls -a'

@@ -17,24 +17,21 @@ export EDITOR="${EDITOR:-vim}"
 [[ -r "$HOME/.local/bin/env" ]] && source "$HOME/.local/bin/env"
 
 # -----------------------------
-# OS detection (hooks)
+# OS detection
 # -----------------------------
 case "$OSTYPE" in
   darwin*)
-    # macOS-specific (optional)
-    # Homebrew shellenv (uncomment if you use brew)
-    # if [[ -x /opt/homebrew/bin/brew ]]; then
-    #   eval "$(/opt/homebrew/bin/brew shellenv)"
-    # elif [[ -x /usr/local/bin/brew ]]; then
-    #   eval "$(/usr/local/bin/brew shellenv)"
-    # fi
+    if [[ -x /opt/homebrew/bin/brew ]]; then
+      eval "$(/opt/homebrew/bin/brew shellenv)"
+    elif [[ -x /usr/local/bin/brew ]]; then
+      eval "$(/usr/local/bin/brew shellenv)"
+    fi
     ;;
   linux-gnu*)
-    # Linux-specific (optional)
-    # WSL detection example:
-    # if [[ -r /proc/version ]] && grep -qi microsoft /proc/version; then
-    #   :
-    # fi
+    if [[ -r /proc/version ]] && grep -qi microsoft /proc/version; then
+      # WSL: interop PATH cleanup (keeps Windows tools available but at the end)
+      export PATH="$PATH:/mnt/c/Windows/System32"
+    fi
     ;;
 esac
 
@@ -52,9 +49,13 @@ compinit -C -d "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
 # -----------------------------
 # Plugins (safe sourcing)
 # -----------------------------
+# fzf: paths differ between Debian/Ubuntu (apt) and macOS (Homebrew)
 if [[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]]; then
   source /usr/share/doc/fzf/examples/key-bindings.zsh
-  #source /usr/share/doc/fzf/examples/completion.zsh
+elif [[ -f /opt/homebrew/opt/fzf/shell/key-bindings.zsh ]]; then
+  source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
+elif [[ -f /usr/local/opt/fzf/shell/key-bindings.zsh ]]; then
+  source /usr/local/opt/fzf/shell/key-bindings.zsh
 fi
 
 if [[ -f "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then

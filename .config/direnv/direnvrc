@@ -66,6 +66,22 @@ layout_pyenv() {
   export PYENV_VERSION
 }
 
+# uv
+layout_uv() {
+  if ! command -v uv &>/dev/null; then
+    log_error "uv not found. Install it: https://docs.astral.sh/uv/"
+    return 1
+  fi
+  local python_version="${1:-}"
+  if [[ -n "$python_version" ]]; then
+    uv venv --python "$python_version" .venv
+  elif [[ ! -d .venv ]]; then
+    uv venv .venv
+  fi
+  export VIRTUAL_ENV="$PWD/.venv"
+  PATH_add "$VIRTUAL_ENV/bin"
+}
+
 # Poetry
 layout_poetry() {
   if [[ ! -f pyproject.toml ]]; then
