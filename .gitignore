@@ -35,6 +35,7 @@
 !/.config/ranger/**
 !/.config/wtf/
 !/.config/wtf/**
+.config/wtf/log.txt
 
 ## bin
 !/bin/
