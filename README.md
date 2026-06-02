@@ -10,10 +10,13 @@ Configuración personal para **WSL2 + Windows Terminal** y **macOS + iTerm2**.
 | Herramienta | Descripción |
 |---|---|
 | [zsh](https://zsh.org) | Shell principal |
+| [zsh-files](https://github.com/fenandosr/zsh-files) | Configuración zsh propia — aliases, paths, historial, prompt, ssh-agent |
 | [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) | Sugerencias basadas en historial |
 | [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) | Highlighting de comandos en tiempo real |
 | [zsh-z](https://github.com/agkozak/zsh-z) | Navegación rápida por directorios frecuentes |
-| [fzf](https://github.com/junegunn/fzf) | Búsqueda fuzzy (`Ctrl+R`, `Ctrl+T`, `Alt+C`) |
+| [zsh-completions](https://github.com/zsh-users/zsh-completions) | Completions adicionales para zsh |
+| [fzf](https://github.com/junegunn/fzf) | Búsqueda fuzzy — `Ctrl+R` historial, `Ctrl+T` archivos, `Alt+C` directorios |
+| [peco](https://github.com/peco/peco) | Filtro interactivo — fallback de `Ctrl+R` en macOS sin fzf |
 
 ### Terminal
 | Herramienta | Descripción |
@@ -62,10 +65,19 @@ brew install zsh tmux vim fzf ranger direnv
 **Plugins de zsh** (misma ruta en ambos sistemas):
 ```bash
 mkdir -p ~/.zsh
-git clone https://github.com/zsh-users/zsh-autosuggestions     ~/.zsh/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting  ~/.zsh/zsh-syntax-highlighting
-git clone https://github.com/agkozak/zsh-z                      ~/.zsh/zsh-z
-git clone https://github.com/zsh-users/zsh-completions          ~/.zsh/zsh-completions
+git clone https://github.com/fenandosr/zsh-files                ~/.zsh/zsh-files
+git clone https://github.com/zsh-users/zsh-autosuggestions      ~/.zsh/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting   ~/.zsh/zsh-syntax-highlighting
+git clone https://github.com/agkozak/zsh-z                       ~/.zsh/zsh-z
+git clone https://github.com/zsh-users/zsh-completions           ~/.zsh/zsh-completions
+```
+
+> `zsh-files` es el repo propio con aliases, paths de apps, historial, prompt y ssh-agent.
+> El `.zshrc` lo carga con `source ~/.zsh/zsh-files/init.zsh`.
+
+**peco** (fallback de `Ctrl+R` en macOS si no está fzf):
+```bash
+brew install peco
 ```
 
 **wtfutil**
