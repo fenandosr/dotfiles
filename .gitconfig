@@ -1,6 +1,6 @@
 [user]
-    email = fenandos@bit-a-bit.org
     name = Fernando Rivas
+    # email goes in ~/.gitconfig.local
 
 [core]
     autocrlf = input

@@ -75,3 +75,8 @@ if [[ -f "$HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; th
   source "$HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 fi
 
+# iTerm2 shell integration (macOS only — install via iTerm2 > Install Shell Integration)
+[[ -f "$HOME/.iterm2_shell_integration.zsh" ]] && source "$HOME/.iterm2_shell_integration.zsh"
+
+# Machine-specific overrides
+[[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"

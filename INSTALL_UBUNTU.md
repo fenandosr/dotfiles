@@ -50,7 +50,6 @@ sudo apt install -y \
   fzf \
   htop \
   ncdu \
-  peco \
   ranger \
   ripgrep
 ```
@@ -63,7 +62,6 @@ sudo apt install -y \
 | `fd` | `find` | Búsqueda de archivos rápida y ergonómica |
 | `fzf` | — | Fuzzy finder — `Ctrl+R` historial, `Ctrl+T` archivos |
 | `ncdu` | `du` | Uso de disco navegable en terminal |
-| `peco` | — | Filtro interactivo (fallback de `Ctrl+R` en macOS) |
 | `ranger` | — | Explorador de archivos en terminal con vim keybindings |
 | `ripgrep` | `grep` | Búsqueda en código, ignora `.git` y archivos binarios por defecto |
 

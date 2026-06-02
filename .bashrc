@@ -27,16 +27,6 @@ shopt -s checkwinsize
 # match all files and zero or more directories and subdirectories.
 shopt -s globstar
 
-
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    # DIST
-    DIST=`lsb_release -d | awk -F"\t" '{print $2}' | awk -F " " '{print $1}'`
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-
-elif [[ "$OSTYPE" == "cygwin" ]]; then
-
-fi
-
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi

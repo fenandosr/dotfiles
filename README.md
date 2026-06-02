@@ -16,7 +16,6 @@ Configuración personal para **WSL2 + Windows Terminal** y **macOS + iTerm2**.
 | [zsh-z](https://github.com/agkozak/zsh-z) | Navegación rápida por directorios frecuentes |
 | [zsh-completions](https://github.com/zsh-users/zsh-completions) | Completions adicionales para zsh |
 | [fzf](https://github.com/junegunn/fzf) | Búsqueda fuzzy — `Ctrl+R` historial, `Ctrl+T` archivos, `Alt+C` directorios |
-| [peco](https://github.com/peco/peco) | Filtro interactivo — fallback de `Ctrl+R` en macOS sin fzf |
 
 ### Terminal
 | Herramienta | Descripción |
@@ -74,11 +73,6 @@ git clone https://github.com/zsh-users/zsh-completions           ~/.zsh/zsh-comp
 
 > `zsh-files` es el repo propio con aliases, paths de apps, historial, prompt y ssh-agent.
 > El `.zshrc` lo carga con `source ~/.zsh/zsh-files/init.zsh`.
-
-**peco** (fallback de `Ctrl+R` en macOS si no está fzf):
-```bash
-brew install peco
-```
 
 **wtfutil**
 ```bash
