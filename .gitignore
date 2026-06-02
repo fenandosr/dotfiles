@@ -17,6 +17,10 @@
 !/.gitconfig
 !/.gitignore
 
+## docs
+!/README.md
+!/INSTALL_UBUNTU.md
+
 ## vim
 !/.vimrc
 
