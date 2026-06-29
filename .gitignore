@@ -37,6 +37,10 @@
 !/.config/wtf/**
 .config/wtf/log.txt
 
+!/.config/alacritty/
+!/.config/alacritty/**
+.config/alacritty/theme.toml
+
 ## bin
 !/bin/
 !/bin/**
