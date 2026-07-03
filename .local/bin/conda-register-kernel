@@ -13,7 +13,8 @@ DISPLAY_NAME="${2:-Python ($ENV_NAME)}"
 # Busca el env en las instalaciones conocidas de conda/mamba
 find_env() {
   local base
-  for base in "$HOME/micromamba" "$HOME/mambaforge" "$HOME/miniforge3" "$HOME/miniconda3" "$HOME/anaconda3"; do
+  for base in "$HOME/micromamba" "$HOME/mambaforge" "$HOME/miniforge3" "$HOME/miniconda3" "$HOME/anaconda3" \
+              "$HOME/opt/miniconda3" "$HOME/opt/anaconda3" "/opt/homebrew/Caskroom/miniforge/base"; do
     local env_bin="$base/envs/$ENV_NAME/bin"
     [[ -d "$env_bin" ]] && echo "$env_bin" && return
   done
