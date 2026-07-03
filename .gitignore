@@ -49,6 +49,11 @@
 !/.local/
 !/.local/bin/
 !/.local/bin/**
+.local/bin/claude
+.local/bin/micromamba
+.local/bin/uv
+.local/bin/uvx
+.local/bin/wtfutil
 
 ## systemd user services
 !/.config/systemd/
