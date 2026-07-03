@@ -45,6 +45,16 @@
 !/bin/
 !/bin/**
 
+## local bin (scripts de usuario)
+!/.local/
+!/.local/bin/
+!/.local/bin/**
+
+## systemd user services
+!/.config/systemd/
+!/.config/systemd/user/
+!/.config/systemd/user/*.service
+
 ## bootstrap
 !/install.sh
 

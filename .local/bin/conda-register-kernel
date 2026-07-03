@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ENV_NAME="${1:-}"
+
+if [[ -z "$ENV_NAME" ]]; then
+  echo "Uso: conda-register-kernel <env-name> [display-name]" >&2
+  exit 1
+fi
+
+DISPLAY_NAME="${2:-Python ($ENV_NAME)}"
+
+# Busca el env en las instalaciones conocidas de conda/mamba
+find_env() {
+  local base
+  for base in "$HOME/micromamba" "$HOME/mambaforge" "$HOME/miniforge3" "$HOME/miniconda3" "$HOME/anaconda3"; do
+    local env_bin="$base/envs/$ENV_NAME/bin"
+    [[ -d "$env_bin" ]] && echo "$env_bin" && return
+  done
+  return 1
+}
+
+ENV_BIN=$(find_env 2>/dev/null) || {
+  echo "No se encontró el env micromamba '$ENV_NAME'." >&2
+  exit 1
+}
+
+PYTHON="$ENV_BIN/python"
+
+if [[ ! -x "$PYTHON" ]]; then
+  echo "No se encontró python en $ENV_BIN" >&2
+  exit 1
+fi
+
+# Asegura ipykernel en el env
+if ! "$PYTHON" -c "import ipykernel" 2>/dev/null; then
+  echo "ipykernel no encontrado en '$ENV_NAME', instalando..." >&2
+  "$ENV_BIN/pip" install ipykernel
+fi
+
+"$PYTHON" -m ipykernel install \
+  --user \
+  --name "$ENV_NAME" \
+  --display-name "$DISPLAY_NAME"
+
+echo "Kernel registrado:"
+echo "  name         = $ENV_NAME"
+echo "  display-name = $DISPLAY_NAME"
+echo "  python       = $PYTHON"
