@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Re-compone las ramas de este host (leídas de ~/.dotfiles-host, escrito
+# por install.sh) y trae cambios nuevos de base/os-*/shell-*/profile-full.
+
+MANIFEST="$HOME/.dotfiles-host"
+[[ -f "$MANIFEST" ]] || {
+  echo "No existe $MANIFEST — corre install.sh primero." >&2
+  exit 1
+}
+
+# shellcheck disable=SC1090
+source "$MANIFEST"
+
+cd "$HOME"
+echo "==> git fetch --all"
+git fetch --all --quiet
+
+BRANCHES=(base "os-$os" "shell-$shell")
+[[ "$profile" == full ]] && BRANCHES+=(profile-full)
+
+echo "==> git merge ${BRANCHES[*]}"
+git merge --no-edit "${BRANCHES[@]/#/origin/}"
+
+if [[ "$shell" == zsh && "$profile" == full ]]; then
+  echo "==> Actualizando submodules de zsh"
+  git submodule update --init --recursive
+fi
+
+echo "==> Listo ($(git rev-parse --short HEAD))"
