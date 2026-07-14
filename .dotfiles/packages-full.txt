@@ -1,0 +1,5 @@
+# Extra packages for --profile full, on top of the OS package manifest.
+# Same name in apt and brew for all of these.
+direnv
+# wtfutil has no apt package — install manually from
+# https://github.com/wtfutil/wtf/releases (brew install wtfutil on macOS).
