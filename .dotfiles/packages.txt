@@ -1,0 +1,9 @@
+# Homebrew formula names installed by install.sh on os-macos.
+# One name per line, "#" comments allowed.
+git
+jq
+tree
+tmux
+vim
+fzf
+ranger
