@@ -34,4 +34,9 @@ fi
 
 [[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
 
+# OS-specific env (os-wsl2 / os-macos / os-linux branches)
+for f in "$HOME"/.shell.d/*.sh; do
+    [[ -e "$f" ]] && . "$f"
+done
+
 [[ -f "$HOME/.bashrc.local" ]] && . "$HOME/.bashrc.local"

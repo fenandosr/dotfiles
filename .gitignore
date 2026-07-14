@@ -13,6 +13,25 @@
 !/.bash_aliases
 !/.zshrc
 
+## fragment loaders (composed by os-*/shell-*/profile-* branches)
+!/.shell.d/
+!/.shell.d/**
+!/.zsh.d/
+!/.zsh.d/**
+
+## zsh plugins (submodules, profile-full branch only)
+!/.gitmodules
+!/.zsh/
+!/.zsh/zsh-files/
+!/.zsh/zsh-autosuggestions/
+!/.zsh/zsh-syntax-highlighting/
+!/.zsh/zsh-z/
+!/.zsh/zsh-completions/
+
+## host bootstrap manifests (os-*/profile-* branches)
+!/.dotfiles/
+!/.dotfiles/**
+
 ## git
 !/.gitconfig
 !/.gitignore
