@@ -14,6 +14,7 @@ export EDITOR="${EDITOR:-vim}"
 # -----------------------------
 # Environment (PATH, etc.)
 # -----------------------------
+[[ -d "$HOME/bin" ]] && export PATH="$HOME/bin:$PATH"
 [[ -r "$HOME/.local/bin/env" ]] && source "$HOME/.local/bin/env"
 
 # -----------------------------
