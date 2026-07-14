@@ -32,6 +32,7 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 
+[[ -d "$HOME/bin" ]] && export PATH="$HOME/bin:$PATH"
 [[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
 
 # OS-specific env (os-wsl2 / os-macos / os-linux branches)
