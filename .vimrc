@@ -174,7 +174,6 @@ Plug 'dense-analysis/ale'
 Plug 'tpope/vim-markdown'
 
 " Utilities
-Plug 'fenandosr/taskpaper.vim'
 Plug 'direnv/direnv.vim'
 Plug 'mtth/scratch.vim'
 
