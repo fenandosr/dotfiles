@@ -1,3 +1,0 @@
-- [ ] Revisar PRs pendientes
-- [ ] Actualizar dependencias (uv)
-- [ ] ...
