@@ -1,0 +1,2 @@
+# bash ships preinstalled almost everywhere; nothing to add here today.
+# File exists so install.sh has a consistent path to check for every shell.
