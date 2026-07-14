@@ -101,16 +101,20 @@ chsh -s $(which zsh)         # si el shell elegido fue zsh
 |---|---|
 | [uv](https://docs.astral.sh/uv/) | Gestión de entornos y paquetes Python |
 | [micromamba](https://mamba.readthedocs.io) | Entornos conda ligeros |
-| `.local/bin/jlab`, `jn-genomics` | Lanzan JupyterLab/Notebook desde el env conda correspondiente |
-| `.local/bin/*-register-kernel` | Registra un env (uv o conda) como kernel de Jupyter |
+| `bin/jlab`, `jn-genomics` | Lanzan JupyterLab/Notebook desde el env conda correspondiente |
+| `bin/*-register-kernel` | Registra un env (uv o conda) como kernel de Jupyter |
 | `.config/systemd/user/*.service` | Unidades para correr Jupyter/túneles como servicio de usuario |
 
-### Scripts en `~/bin/` (`base`)
-| Script | Descripción |
-|---|---|
-| `add-ssh-key` | Genera llave SSH e imprime la pública |
-| `init-sudo` | Configura sudoers sin contraseña para el usuario actual |
-| `dotfiles-update` | Re-mergea las ramas del host según `~/.dotfiles-host` |
+### Scripts en `~/bin/`
+| Script | Rama | Descripción |
+|---|---|---|
+| `add-ssh-key` | `base` | Genera llave SSH e imprime la pública |
+| `init-sudo` | `base` | Configura sudoers sin contraseña para el usuario actual |
+| `dotfiles-update` | `base` | Re-mergea las ramas del host según `~/.dotfiles-host` |
+| `jlab`, `jn-genomics` | `profile-full` | Lanzan JupyterLab/Notebook desde el env conda correspondiente |
+| `conda-register-kernel`, `uv-register-kernel` | `profile-full` | Registra un env (uv o conda) como kernel de Jupyter |
+
+`~/.local/bin` es del host (uv, micromamba, wtfutil, symlinks de tool-installs) — nunca se trackea en el repo.
 
 ---
 
