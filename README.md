@@ -61,7 +61,7 @@ Relee `~/.dotfiles-host` y vuelve a mergear las mismas ramas (`git fetch` + `git
 ### Pendientes manuales tras el bootstrap
 
 ```bash
-vim +PluginInstall +qall     # plugins de vim (Vundle)
+vim +PlugInstall +qall       # plugins de vim (vim-plug)
 chsh -s $(which zsh)         # si el shell elegido fue zsh
 ```
 
@@ -94,7 +94,7 @@ chsh -s $(which zsh)         # si el shell elegido fue zsh
 ### Editores
 | Herramienta | Rama | Descripción |
 |---|---|---|
-| [vim](https://vim.org) | `base` | Editor principal — plugins via Vundle |
+| [vim](https://vim.org) | `base` | Editor principal — plugins via vim-plug |
 
 ### Python / Data (`profile-full`)
 | Herramienta | Descripción |
@@ -131,7 +131,7 @@ chsh -s $(which zsh)         # si el shell elegido fue zsh
 ├── .zsh.d/*.zsh                # Fragmentos de zsh: 00-core, 50-plugins
 ├── .zshrc / .bashrc           # Loaders delgados (shell-zsh / shell-bash)
 ├── .tmux.conf                # Multiplexor — prefix C-q, vi mode, clipboard cross-platform
-├── .vimrc                    # Vim — Vundle, cyberpunk theme, airline
+├── .vimrc                    # Vim — vim-plug, cyberpunk theme, airline
 ├── .bash_aliases             # Aliases compartidos
 ├── .gitconfig                # Git global — aliases, autocrlf, defaultBranch
 ├── .config/
