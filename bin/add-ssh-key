@@ -22,9 +22,8 @@ fi
 
 ssh-keygen -t "$type" -C "${comment:-}" -f "$HOME/.ssh/$keyname"
 
-## show public key for GitHub copy
 echo
-echo "## Public key to copy into GitHub:"
+echo "## Public key:"
 echo
 cat "$HOME/.ssh/${keyname}.pub"
 echo
