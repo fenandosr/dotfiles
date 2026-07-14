@@ -1,0 +1,10 @@
+# apt package names installed by install.sh on os-linux.
+# Deliberately smaller than os-wsl2: no build-essential/unzip assumed
+# on a server unless you need them.
+curl
+wget
+git
+tmux
+vim
+fzf
+ranger
