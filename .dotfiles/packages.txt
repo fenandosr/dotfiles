@@ -1,0 +1,13 @@
+# apt package names installed by install.sh on os-wsl2.
+# One name per line, "#" comments allowed.
+build-essential
+curl
+wget
+unzip
+git
+jq
+tree
+tmux
+vim
+fzf
+ranger
