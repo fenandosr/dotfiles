@@ -5,7 +5,7 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-ExecStart=%h/.local/bin/jlab \
+ExecStart=%h/bin/jlab \
   --no-browser \
   --ip=127.0.0.1 \
   --port=8888 \

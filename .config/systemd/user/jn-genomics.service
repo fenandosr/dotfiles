@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=%h/.local/bin/jn-genomics --no-browser --ip=127.0.0.1 --port=8887
+ExecStart=%h/bin/jn-genomics --no-browser --ip=127.0.0.1 --port=8887
 WorkingDirectory=%h
 Restart=on-failure
 RestartSec=5
