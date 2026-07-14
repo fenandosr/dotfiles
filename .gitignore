@@ -64,15 +64,8 @@
 !/bin/
 !/bin/**
 
-## local bin (scripts de usuario)
-!/.local/
-!/.local/bin/
-!/.local/bin/**
-.local/bin/claude
-.local/bin/micromamba
-.local/bin/uv
-.local/bin/uvx
-.local/bin/wtfutil
+## .local/bin es del host (uv, micromamba, wtfutil, symlinks de tools,
+## etc.) — nunca se trackea. Los scripts propios viven en /bin.
 
 ## systemd user services
 !/.config/systemd/
