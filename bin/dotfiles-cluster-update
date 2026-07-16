@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+## ~/bin/dotfiles-cluster-update
+## Corre bin/dotfiles-update en el $HOME de gen@<host> en varios hosts via clush.
+##
+## usage: dotfiles-cluster-update --all
+##        dotfiles-cluster-update --host=H1,H2,...
+set -euo pipefail
+
+REMOTE_USER="gen"
+
+usage() {
+  cat <<EOF
+Uso: $(basename "$0") --all | --host=H1,H2,...
+
+  --all          Todos los hosts del grupo default de clush.
+  --host=H1,H2   Lista de hosts (coma-separada, sintaxis -w de clush).
+
+Antes de correr bin/dotfiles-update en cada host, carga el agente ssh
+persistente (keychain, llave papalo) de ese host. Si no hay llave cargada
+ahí, se salta ese host en vez de fallar el git fetch a medias.
+EOF
+  exit 1
+}
+
+[[ $# -eq 1 ]] || usage
+
+case "$1" in
+  --all)        CLUSH_TARGET=(-a) ;;
+  --host=*)
+    hosts="${1#--host=}"
+    [[ -z "$hosts" ]] && usage
+    CLUSH_TARGET=(-w "$hosts")
+    ;;
+  -h|--help)    usage ;;
+  *) echo "Flag desconocida: $1" >&2; usage ;;
+esac
+
+# shellcheck disable=SC2016
+REMOTE_CMD='
+host="$(hostname -s)"
+source "$HOME/.keychain/${host}-sh" >/dev/null 2>&1 || true
+if ! ssh-add -l >/dev/null 2>&1; then
+  echo "[$host] sin llave ssh cargada (keychain) -- se salta" >&2
+  exit 1
+fi
+"$HOME/bin/dotfiles-update"
+'
+
+echo "==> clush ${CLUSH_TARGET[*]} -l $REMOTE_USER"
+clush "${CLUSH_TARGET[@]}" -l "$REMOTE_USER" -b "$REMOTE_CMD"
