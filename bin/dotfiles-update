@@ -12,6 +12,7 @@ MANIFEST="$HOME/.dotfiles-host"
 
 # shellcheck disable=SC1090
 source "$MANIFEST"
+tools="${tools:-}"  # manifiestos viejos no tienen esta línea
 
 cd "$HOME"
 echo "==> git fetch --all"
@@ -19,6 +20,7 @@ git fetch --all --quiet
 
 BRANCHES=(base "os-$os" "shell-$shell")
 [[ "$profile" == full ]] && BRANCHES+=(profile-full)
+[[ -n "$tools" ]] && BRANCHES+=("tools-$tools")
 
 echo "==> git merge ${BRANCHES[*]}"
 git merge --no-edit "${BRANCHES[@]/#/origin/}"
