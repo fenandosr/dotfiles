@@ -1,0 +1,104 @@
+#!/usr/bin/env bash
+## ~/bin/aws/ses-smtp-user
+## Crea un usuario IAM con permiso de envío SES y genera sus
+## credenciales SMTP (equivalente a "Create SMTP credentials" en la consola).
+##
+## usage: ses-smtp-user [-u iam-user-name] [-r region] [-p managed-policy-arn]
+##
+## Por defecto adjunta una policy INLINE mínima (solo ses:SendEmail /
+## ses:SendRawEmail), igual que hace la consola. Pasa -p para usar en
+## su lugar una managed policy (ej. arn:aws:iam::aws:policy/AmazonSESFullAccess).
+
+set -euo pipefail
+
+IAM_USER="ses-smtp-huellagenica"
+REGION="us-east-1"
+POLICY_ARN=""
+INLINE_POLICY_NAME="ses-sending-only"
+
+usage() {
+  echo "usage: ses-smtp-user [-u iam-user-name] [-r region] [-p managed-policy-arn]" >&2
+  echo "  defaults: -u $IAM_USER  -r $REGION  (policy: inline ses:SendEmail/SendRawEmail)" >&2
+  exit 1
+}
+
+while getopts ":u:r:p:h" opt; do
+  case "$opt" in
+    u) IAM_USER="$OPTARG" ;;
+    r) REGION="$OPTARG" ;;
+    p) POLICY_ARN="$OPTARG" ;;
+    h) usage ;;
+    *) usage ;;
+  esac
+done
+
+command -v aws >/dev/null 2>&1 || { echo "No se encontró 'aws' (AWS CLI) en el PATH." >&2; exit 1; }
+command -v python3 >/dev/null 2>&1 || { echo "Se necesita python3 para derivar el SMTP password." >&2; exit 1; }
+
+## 1. Crear el usuario IAM (si ya existe, lo reutiliza)
+if aws iam get-user --user-name "$IAM_USER" >/dev/null 2>&1; then
+  echo "Usuario IAM '$IAM_USER' ya existe, se reutiliza." >&2
+else
+  aws iam create-user --user-name "$IAM_USER" >/dev/null
+  echo "Usuario IAM '$IAM_USER' creado." >&2
+fi
+
+## 2. Darle permiso de envío SES (idempotente)
+if [[ -n "$POLICY_ARN" ]]; then
+  aws iam attach-user-policy --user-name "$IAM_USER" --policy-arn "$POLICY_ARN"
+else
+  aws iam put-user-policy \
+    --user-name "$IAM_USER" \
+    --policy-name "$INLINE_POLICY_NAME" \
+    --policy-document '{
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": ["ses:SendEmail", "ses:SendRawEmail"],
+          "Resource": "*"
+        }
+      ]
+    }'
+fi
+
+## 3. Generar el access key
+read -r access_key_id secret_access_key <<<"$(
+  aws iam create-access-key \
+    --user-name "$IAM_USER" \
+    --query 'AccessKey.[AccessKeyId,SecretAccessKey]' \
+    --output text
+)"
+
+## 4. Derivar el SMTP password a partir del secret access key
+smtp_password=$(python3 - "$secret_access_key" "$REGION" <<'PY'
+import hmac, hashlib, base64, sys
+
+secret_access_key, region = sys.argv[1], sys.argv[2]
+
+def sign(key, msg):
+    return hmac.new(key, msg.encode("utf-8"), hashlib.sha256).digest()
+
+def smtp_password(secret_key, region):
+    k = sign(("AWS4" + secret_key).encode("utf-8"), "11111111")
+    k = sign(k, region)
+    k = sign(k, "ses")
+    k = sign(k, "aws4_request")
+    k = sign(k, "SendRawEmail")
+    return base64.b64encode(bytes([4]) + k).decode("utf-8")
+
+print(smtp_password(secret_access_key, region))
+PY
+)
+
+cat <<EOF
+
+## Credenciales SMTP de SES ($IAM_USER / $REGION)
+SMTP endpoint:  email-smtp.${REGION}.amazonaws.com
+Region:         ${REGION}
+SMTP username:  ${access_key_id}
+SMTP password:  ${smtp_password}
+
+Guárdalas ahora: la password no se puede volver a consultar
+(solo se puede regenerar creando un access key nuevo).
+EOF
