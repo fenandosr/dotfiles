@@ -14,8 +14,9 @@ El repo usa `$HOME` como worktree: cada rama trae archivos reales a `$HOME`, no 
 | `os-wsl2` / `os-macos` / `os-linux` | OS | Env pineado por OS + manifiesto de paquetes (apt/brew) |
 | `shell-zsh` / `shell-bash` | shell | `.zshrc`/`.bashrc` como loaders de fragmentos |
 | `profile-full` | perfil | Plugins pesados de zsh (submodules), direnv, wtf, tooling de Jupyter/genómica |
+| `tools-aws` | tool (opcional) | `bin/aws/` — scripts de AWS CLI (ej. `ses-smtp-user`) |
 
-`profile-full` es puramente aditivo — nunca borra algo que otra rama agregó — así que compone sin conflictos sobre cualquier combinación de `os-*`/`shell-*`. **Minimal = no mergear `profile-full`**, no existe una rama `profile-minimal` separada.
+`profile-full` y las ramas `tools-*` son puramente aditivas — nunca borran algo que otra rama agregó — así que componen sin conflictos sobre cualquier combinación de `os-*`/`shell-*`. **Minimal = no mergear `profile-full`**, no existe una rama `profile-minimal` separada. Las ramas `tools-*` son ejes independientes del perfil: se piden una por una con `--tools <nombre>` (por ahora solo existe `aws`; nuevas herramientas van en ramas `tools-<nombre>` nuevas, no dentro de `tools-aws`).
 
 `main` se mantiene como rama "todo en uno" de referencia (self-detección de OS en runtime), sin depender de este esquema.
 
@@ -39,13 +40,13 @@ git remote add origin git@github.com:fenandosr/dotfiles.git
 git fetch --all
 git checkout base   # trae install.sh sin pisar nada más todavía
 
-./install.sh --os wsl2 --shell zsh --profile full
+./install.sh --os wsl2 --shell zsh --profile full --tools aws
 ```
 
 `install.sh`:
 1. Respalda cualquier archivo real que choque con lo que van a traer las ramas, en `~/.dotfiles-backup/<timestamp>/`.
 2. Crea (o reusa) una rama `host/<hostname>` a partir de `origin/base`.
-3. Mergea `origin/os-<os>`, `origin/shell-<shell>` y, si `--profile full`, `origin/profile-full`.
+3. Mergea `origin/os-<os>`, `origin/shell-<shell>`, si `--profile full` `origin/profile-full`, y si `--tools <tool>` `origin/tools-<tool>`.
 4. Inicializa los submodules de zsh (`git submodule update --init`) si aplica.
 5. Instala el manifiesto de paquetes compuesto (`.dotfiles/packages*.txt`) vía `apt` o `brew`.
 6. Guarda la elección en `~/.dotfiles-host`.
@@ -113,6 +114,7 @@ chsh -s $(which zsh)         # si el shell elegido fue zsh
 | `dotfiles-update` | `base` | Re-mergea las ramas del host según `~/.dotfiles-host` |
 | `jlab`, `jn-genomics` | `profile-full` | Lanzan JupyterLab/Notebook desde el env conda correspondiente |
 | `conda-register-kernel`, `uv-register-kernel` | `profile-full` | Registra un env (uv o conda) como kernel de Jupyter |
+| `aws/ses-smtp-user` | `tools-aws` | Crea un usuario IAM de envío SES y deriva sus credenciales SMTP |
 
 `~/.local/bin` es del host (uv, micromamba, wtfutil, symlinks de tool-installs) — nunca se trackea en el repo.
 

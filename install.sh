@@ -2,32 +2,34 @@
 set -euo pipefail
 
 # Bootstrapea dotfiles en un host nuevo componiendo ramas de git:
-#   base + os-<os> + shell-<shell> [+ profile-full]
+#   base + os-<os> + shell-<shell> [+ profile-full] [+ tools-<tool>]
 #
 # El repo usa $HOME como worktree (cada rama trae sus propios archivos
 # reales a $HOME, no symlinks). Correr desde dentro de ese worktree.
 
 usage() {
   cat <<EOF
-Uso: install.sh --os {wsl2|macos|linux} --shell {zsh|bash} [--profile {minimal|full}]
+Uso: install.sh --os {wsl2|macos|linux} --shell {zsh|bash} [--profile {minimal|full}] [--tools <tool>]
 
   --os        Rama os-<os> a componer.
   --shell     Rama shell-<shell> a componer.
   --profile   minimal (default) u full (agrega profile-full: plugins
               pesados de zsh, direnv, wtf, tooling de jupyter/genómica).
+  --tools     Rama opcional tools-<tool> a componer (ej. aws). Omitible.
 
 Ejemplo:
-  ./install.sh --os wsl2 --shell zsh --profile full
+  ./install.sh --os wsl2 --shell zsh --profile full --tools aws
 EOF
   exit 1
 }
 
-OS="" SHELL_CHOICE="" PROFILE="minimal"
+OS="" SHELL_CHOICE="" PROFILE="minimal" TOOLS=""
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --os) OS="$2"; shift 2 ;;
     --shell) SHELL_CHOICE="$2"; shift 2 ;;
     --profile) PROFILE="$2"; shift 2 ;;
+    --tools) TOOLS="$2"; shift 2 ;;
     -h|--help) usage ;;
     *) echo "Flag desconocida: $1" >&2; usage ;;
   esac
@@ -37,6 +39,7 @@ done
 case "$OS" in wsl2|macos|linux) ;; *) echo "OS inválido: $OS" >&2; usage ;; esac
 case "$SHELL_CHOICE" in zsh|bash) ;; *) echo "shell inválido: $SHELL_CHOICE" >&2; usage ;; esac
 case "$PROFILE" in minimal|full) ;; *) echo "profile inválido: $PROFILE" >&2; usage ;; esac
+case "$TOOLS" in ""|aws) ;; *) echo "tools inválido: $TOOLS" >&2; usage ;; esac
 
 cd "$HOME"
 
@@ -51,6 +54,7 @@ git fetch --all --quiet
 
 BRANCHES=(base "os-$OS" "shell-$SHELL_CHOICE")
 [[ "$PROFILE" == full ]] && BRANCHES+=(profile-full)
+[[ -n "$TOOLS" ]] && BRANCHES+=("tools-$TOOLS")
 echo "==> Componiendo: ${BRANCHES[*]}"
 
 # Respalda archivos reales (no trackeados aún por este repo) que choquen
@@ -115,6 +119,7 @@ cat > "$HOME/.dotfiles-host" <<HOSTEOF
 os=$OS
 shell=$SHELL_CHOICE
 profile=$PROFILE
+tools=$TOOLS
 bootstrapped=$(date -Iseconds)
 HOSTEOF
 
