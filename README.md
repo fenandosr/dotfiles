@@ -59,6 +59,25 @@ git checkout base   # trae install.sh sin pisar nada más todavía
 
 Relee `~/.dotfiles-host` y vuelve a mergear las mismas ramas (`git fetch` + `git merge`), sin tener que repetir los flags.
 
+### Subir cambios al repo
+
+`dotfiles-update` solo hace pull. Para publicar cambios locales:
+
+```bash
+cd ~
+# Cambios que van a una rama compartida (ej. os-macos, base):
+git checkout os-macos
+# ... edita, commitea ...
+git push origin os-macos
+
+# Luego sincroniza tu host:
+git checkout host/<hostname>
+git merge os-macos
+git push origin host/<hostname>   # opcional, el host branch es personal
+```
+
+Si el cambio es solo de esta máquina (preferencias locales, paths específicos), commitea directamente en `host/<hostname>` sin tocar las ramas compartidas.
+
 ### Pendientes manuales tras el bootstrap
 
 ```bash
