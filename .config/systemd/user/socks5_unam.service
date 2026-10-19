@@ -1,0 +1,17 @@
+[Unit]
+Description=SOCKS5 proxy via SSH to UNAM (mcps)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/ssh -D 1080 -N mcps
+Restart=always
+RestartSec=5
+
+# Evita que ssh pida password/passphrase interactivamente y deje el servicio colgado
+Environment=AUTOSSH_GATETIME=0
+ExecStartPre=/usr/bin/ssh -o BatchMode=yes -o ConnectTimeout=10 mcps true
+
+[Install]
+WantedBy=default.target

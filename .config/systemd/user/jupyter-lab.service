@@ -1,11 +1,11 @@
 [Unit]
-Description=JupyterLab (env: jlab)
+Description=JupyterLab (env: jupyter-lab)
 After=network-online.target
 Wants=network-online.target
 
 [Service]
 Type=simple
-ExecStart=%h/bin/jlab \
+ExecStart=%h/bin/jupyter-lab \
   --no-browser \
   --ip=127.0.0.1 \
   --port=8888 \

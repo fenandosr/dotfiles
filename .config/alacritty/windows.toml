@@ -20,3 +20,7 @@ history = 10000
 [[keyboard.bindings]]
 key = "Return"
 chars = "\r"
+
+[[keyboard.bindings]]
+key = "NumpadEnter"
+chars = "\r"
